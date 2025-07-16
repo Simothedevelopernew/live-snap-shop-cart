@@ -16,6 +16,7 @@ const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>("auth")
   const [user, setUser] = useState<User | null>(null)
   const [streamId, setStreamId] = useState<string>("")
+  const [authMode, setAuthMode] = useState<"login" | "register">("login") // Moved to top level
 
   // Check for existing session on mount
   useEffect(() => {
@@ -67,8 +68,6 @@ const Index = () => {
 
   // Auth state
   if (currentState === "auth" || !user) {
-    const [authMode, setAuthMode] = useState<"login" | "register">("login")
-    
     return (
       <AuthForm
         mode={authMode}
