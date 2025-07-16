@@ -133,7 +133,7 @@ export function LiveStream({ userRole, streamId, onBack, onViewCart }: LiveStrea
       </div>
 
       <div className="flex flex-col lg:flex-row h-[calc(100vh-80px)]">
-        {/* Main Stream Area */}
+        {/* Main Stream Area with Overlay Comments */}
         <div className="flex-1 p-4">
           <Card className="h-full shadow-stream">
             <CardContent className="p-0 h-full">
@@ -151,13 +151,43 @@ export function LiveStream({ userRole, streamId, onBack, onViewCart }: LiveStrea
                   </div>
                 </div>
 
+                {/* TikTok-style Floating Comments Overlay */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute right-4 top-20 bottom-20 w-80 overflow-hidden">
+                    {chatMessages.slice(-5).map((msg, index) => (
+                      <div 
+                        key={msg.id}
+                        className="animate-fade-slide-up mb-3 pointer-events-auto"
+                        style={{
+                          animationDelay: `${index * 0.5}s`,
+                          animationDuration: '0.6s'
+                        }}
+                      >
+                        <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-3 max-w-xs ml-auto">
+                          <div className="flex items-start gap-2">
+                            <Avatar className="h-6 w-6 flex-shrink-0">
+                              <AvatarFallback className="text-xs bg-primary text-white">
+                                {msg.username[0].toUpperCase()}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-xs font-medium text-white/90">{msg.username}</p>
+                              <p className="text-sm text-white break-words leading-snug">{msg.message}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Stream Controls for Seller */}
                 {userRole === "seller" && (
                   <div className="absolute bottom-4 left-4 flex gap-2">
-                    <Button size="sm" variant="secondary">
+                    <Button size="sm" variant="secondary" className="bg-black/50 border-white/20 text-white hover:bg-black/70">
                       <Camera className="h-4 w-4" />
                     </Button>
-                    <Button size="sm" variant="secondary">
+                    <Button size="sm" variant="secondary" className="bg-black/50 border-white/20 text-white hover:bg-black/70">
                       <Mic className="h-4 w-4" />
                     </Button>
                   </div>
@@ -180,7 +210,7 @@ export function LiveStream({ userRole, streamId, onBack, onViewCart }: LiveStrea
                 {/* Active Product Display */}
                 {products.length > 0 && (
                   <div className="absolute top-4 left-4">
-                    <Card className="bg-black/50 border-0 text-white">
+                    <Card className="bg-black/50 border-0 text-white backdrop-blur-sm">
                       <CardContent className="p-3">
                         <h4 className="font-semibold">{products.find(p => p.isActive)?.name || products[0].name}</h4>
                         <p className="text-sm">${products.find(p => p.isActive)?.price || products[0].price}</p>
@@ -188,6 +218,14 @@ export function LiveStream({ userRole, streamId, onBack, onViewCart }: LiveStrea
                     </Card>
                   </div>
                 )}
+
+                {/* Live Viewer Count Badge */}
+                <div className="absolute top-4 right-4">
+                  <Badge className="bg-black/50 text-white border-white/20 backdrop-blur-sm">
+                    <Eye className="h-3 w-3 mr-1" />
+                    {viewerCount} watching
+                  </Badge>
+                </div>
               </div>
 
               {/* Product Management for Seller */}
@@ -241,7 +279,7 @@ export function LiveStream({ userRole, streamId, onBack, onViewCart }: LiveStrea
           </Card>
         </div>
 
-        {/* Chat Sidebar */}
+        {/* Compact Chat Input Panel */}
         <div className="w-full lg:w-80 p-4 lg:pl-0">
           <Card className="h-full flex flex-col">
             <CardHeader className="pb-3">
@@ -256,20 +294,24 @@ export function LiveStream({ userRole, streamId, onBack, onViewCart }: LiveStrea
             </CardHeader>
             
             <CardContent className="flex-1 flex flex-col p-0">
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto px-4 space-y-3">
+              {/* Chat Instructions */}
+              <div className="px-4 py-2 text-sm text-muted-foreground border-b">
+                💬 Comments appear on the video like TikTok!
+              </div>
+
+              {/* Recent Messages List */}
+              <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+                <h4 className="text-sm font-medium text-muted-foreground">Recent messages:</h4>
                 {chatMessages.map((msg) => (
-                  <div key={msg.id} className="animate-fade-slide-up">
-                    <div className="flex items-start gap-2">
-                      <Avatar className="h-6 w-6">
-                        <AvatarFallback className="text-xs bg-primary text-white">
-                          {msg.username[0].toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-medium text-primary">{msg.username}</p>
-                        <p className="text-sm text-foreground break-words">{msg.message}</p>
-                      </div>
+                  <div key={msg.id} className="flex items-start gap-2 p-2 rounded-lg bg-muted/50">
+                    <Avatar className="h-6 w-6">
+                      <AvatarFallback className="text-xs bg-primary text-white">
+                        {msg.username[0].toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-primary">{msg.username}</p>
+                      <p className="text-sm text-foreground break-words">{msg.message}</p>
                     </div>
                   </div>
                 ))}
@@ -279,7 +321,7 @@ export function LiveStream({ userRole, streamId, onBack, onViewCart }: LiveStrea
               <div className="p-4 border-t">
                 <div className="flex gap-2">
                   <Input
-                    placeholder="Type a message..."
+                    placeholder="Comment on the live stream..."
                     value={chatMessage}
                     onChange={(e) => setChatMessage(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
@@ -289,6 +331,9 @@ export function LiveStream({ userRole, streamId, onBack, onViewCart }: LiveStrea
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Your message will float over the video ✨
+                </p>
               </div>
             </CardContent>
           </Card>
