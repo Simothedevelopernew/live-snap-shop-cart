@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -52,6 +53,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Live commerce specific colors
+				live: 'hsl(var(--live-indicator))',
+				viewer: 'hsl(var(--viewer-count))',
+				chat: 'hsl(var(--chat-bubble))',
+				cart: 'hsl(var(--cart-highlight))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -84,11 +90,56 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'live-pulse': {
+					'0%, 100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					},
+					'50%': {
+						opacity: '0.8',
+						transform: 'scale(1.05)'
+					}
+				},
+				'cart-bounce': {
+					'0%, 20%, 50%, 80%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'40%': {
+						transform: 'translateY(-10px)'
+					},
+					'60%': {
+						transform: 'translateY(-5px)'
+					}
+				},
+				'fade-slide-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'live-pulse': 'live-pulse 2s ease-in-out infinite',
+				'cart-bounce': 'cart-bounce 0.6s ease-in-out',
+				'fade-slide-up': 'fade-slide-up 0.3s ease-out'
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-live': 'var(--gradient-live)',
+				'gradient-cart': 'var(--gradient-cart)',
+				'gradient-bg': 'var(--gradient-bg)'
+			},
+			boxShadow: {
+				'stream': 'var(--shadow-stream)',
+				'live': 'var(--shadow-live)',
+				'card-custom': 'var(--shadow-card)'
 			}
 		}
 	},

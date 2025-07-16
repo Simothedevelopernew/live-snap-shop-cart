@@ -18,6 +18,10 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Live commerce specific variants
+        live: "bg-gradient-live text-white hover:opacity-90 shadow-live animate-live-pulse",
+        stream: "bg-gradient-primary text-white hover:opacity-90 shadow-stream",
+        cart: "bg-gradient-cart text-white hover:opacity-90 shadow-card-custom",
       },
       size: {
         default: "h-10 px-4 py-2",

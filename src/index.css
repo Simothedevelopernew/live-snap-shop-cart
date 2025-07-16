@@ -2,39 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Live Selling App Design System - Vibrant live commerce theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 248 50% 97%;
+    --foreground: 260 15% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 260 15% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 260 15% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Live commerce purple-pink gradient theme */
+    --primary: 280 100% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 285 85% 75%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 260 25% 95%;
+    --secondary-foreground: 260 15% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 255 20% 96%;
+    --muted-foreground: 260 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 320 80% 70%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 260 20% 90%;
+    --input: 260 20% 96%;
+    --ring: 280 100% 65%;
+
+    /* Live streaming specific colors */
+    --live-indicator: 0 100% 65%;
+    --viewer-count: 210 100% 60%;
+    --chat-bubble: 260 30% 95%;
+    --cart-highlight: 45 100% 65%;
+
+    /* Gradients for live commerce feel */
+    --gradient-primary: linear-gradient(135deg, hsl(280 100% 65%), hsl(320 80% 70%));
+    --gradient-live: linear-gradient(45deg, hsl(0 100% 65%), hsl(15 100% 60%));
+    --gradient-cart: linear-gradient(135deg, hsl(280 100% 65%), hsl(45 100% 65%));
+    --gradient-bg: linear-gradient(180deg, hsl(248 50% 97%), hsl(255 20% 96%));
+
+    /* Shadows for depth */
+    --shadow-stream: 0 10px 30px -5px hsl(280 100% 65% / 0.3);
+    --shadow-live: 0 0 20px hsl(0 100% 65% / 0.5);
+    --shadow-card: 0 4px 20px -2px hsl(260 15% 10% / 0.1);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --pulse-live: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
     --radius: 0.5rem;
 
